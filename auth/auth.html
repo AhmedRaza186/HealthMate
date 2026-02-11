@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect with HealthMate</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="auth-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="auth-wrapper">
+        <div class="auth-side-brand">
+            <div class="brand-overlay"></div>
+            <div class="brand-content reveal">
+                <a href="index.html" class="back-home"><i class="fas fa-chevron-left"></i> Back to Home</a>
+                <div class="logo-large">
+                    <i class="fas fa-heartbeat pulse"></i>
+                    <span>HealthMate</span>
+                </div>
+                <h2>Aapka Healthy <br><span class="highlight">Friend.</span></h2>
+                <p>Digital vault for your family's medical reports. Simple insights in English & Roman Urdu.</p>
+                
+                <div class="check-list">
+                    <div class="check-item"><i class="fas fa-check-circle"></i> 100% Private & Secure</div>
+                    <div class="check-item"><i class="fas fa-check-circle"></i> AI-Powered Reports</div>
+                    <div class="check-item"><i class="fas fa-check-circle"></i> Easy Vitals Tracking</div>
+                </div>
+            </div>
+        </div>
+<div class="auth-side-form">
+    <div class="form-container">
+        <div class="mobile-only-logo" style="display: none;">
+            <i class="fas fa-heartbeat" style="color: var(--teal);"></i>
+            <span style="font-weight: 800; font-size: 1.5rem; color: #0f172a;">HealthMate</span>
+        </div>
+                <div class="form-toggle">
+                    <button id="toggleLogin" class="active">Login</button>
+                    <button id="toggleSignup">Signup</button>
+                </div>
+
+                <div class="form-body">
+                    <form id="loginForm" class="auth-form">
+                        <h1>Welcome Back</h1>
+                        <p class="subtext">Please enter your details to sign in.</p>
+                        
+                        <div class="input-box">
+                            <label>Email Address</label>
+                            <input type="email" placeholder="e.g. name@gmail.com" required>
+                        </div>
+                        
+                        <div class="input-box">
+                            <label>Password</label>
+                            <input type="password" placeholder="••••••••" required>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary-auth">Sign In to Vault</button>
+                    </form>
+
+                    <form id="signupForm" class="auth-form hidden">
+                        <h1>Get Started</h1>
+                        <p class="subtext">Create your free account in seconds.</p>
+                        
+                        <div class="input-box">
+                            <label>Full Name</label>
+                            <input type="text" placeholder="Enter your name" required>
+                        </div>
+                        
+                        <div class="input-box">
+                            <label>Email Address</label>
+                            <input type="email" placeholder="e.g. name@gmail.com" required>
+                        </div>
+                        
+                        <div class="input-box">
+                            <label>Password</label>
+                            <input type="password" placeholder="Create a strong password" required>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary-auth">Create Account</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<script type="module" src="auth.js"></script>
+
+</body>
+</html>

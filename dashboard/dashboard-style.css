@@ -1,0 +1,143 @@
+:root {
+    --teal: #0d9488;
+    --bg-light: #f8fafc;
+    --sidebar-dark: #0f172a;
+    --text-main: #1e293b;
+}
+
+body {
+    margin: 0;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg-light);
+}
+
+.dashboard-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    width: 260px;
+    background: var(--sidebar-dark);
+    color: white;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--teal);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 50px;
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+    flex-grow: 1;
+}
+
+.nav-links li {
+    margin-bottom: 15px;
+}
+
+.nav-links a {
+    color: #94a3b8;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px;
+    border-radius: 10px;
+    transition: 0.3s;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+.nav-links li.active a, .nav-links a:hover {
+    background: rgba(13, 148, 136, 0.1);
+    color: var(--teal);
+}
+
+/* Main Content Area */
+.main-content {
+    flex-grow: 1;
+    padding: 40px;
+}
+
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.btn-add-member {
+    background: var(--teal);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(13, 148, 136, 0.2);
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    font-size: 1rem;
+}
+
+/* Family Grid */
+.family-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.member-card {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    transition: 0.3s;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.member-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--teal);
+}
+
+.member-card i {
+    font-size: 3rem;
+    color: var(--teal);
+    margin-bottom: 15px;
+}
+
+.add-card {
+    border: 2px dashed #cbd5e1;
+    background: transparent;
+    color: #64748b;
+}
+#logoutBtn{
+        background: var(--teal);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(13, 148, 136, 0.2);
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    font-size: 1rem;
+}
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .sidebar { display: none; } /* We will add a mobile hamburger later */
+    .main-content { padding: 20px; }
+    .content-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+}

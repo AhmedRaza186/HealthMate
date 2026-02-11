@@ -1,0 +1,421 @@
+:root {
+    --primary-teal: #0d9488;
+    --light-teal: #f0fdfa;
+    --navy: #0f172a;
+    --text-gray: #64748b;
+    --bg-white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+/* 5. Smooth Scroll Behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-white);
+    color: var(--navy);
+}
+
+
+/* --- Custom Scrollbar Styles --- */
+
+/* 1. The width of the entire scrollbar */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+/* 2. The background of the scrollbar (the track) */
+::-webkit-scrollbar-track {
+    background: #f1f5f9; /* Light gray to match your background */
+}
+
+/* 3. The draggable part (the thumb) */
+::-webkit-scrollbar-thumb {
+    background: var(--primary-teal); /* Your signature teal color */
+    border-radius: 10px;
+    border: 3px solid #f1f5f9; /* Creates a padding effect around the thumb */
+    transition: background 0.3s ease;
+}
+
+/* 4. Thumb color when you hover over it */
+::-webkit-scrollbar-thumb:hover {
+    background: #0f766e; /* Darker teal on hover */
+}
+
+/* For Firefox (Standard support) */
+* {
+    scrollbar-width:10px;
+    scrollbar-color: var(--primary-teal) #f1f5f9;
+}
+
+/* Nav */
+.navbar {
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #f1f5f9;
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 100;
+}
+
+.nav-container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.logo-icon {
+    background: var(--primary-teal);
+    color: white;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+.teal-text {
+    color: var(--primary-teal);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-gray);
+    font-weight: 500;
+    font-size: 1rem;
+
+}
+
+.btn-signup {
+    background: var(--primary-teal);
+    color: white;
+    padding: 10px 22px;
+    border-radius: 50px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1rem;
+
+}
+
+.btn-login {
+    background: none;
+    border: none;
+    font-weight: 600;
+    color: var(--navy);
+    cursor: pointer;
+    font-size: 1rem;
+    padding-right: 10px;
+
+}
+
+/* Hero Section */
+.hero {
+    padding: 100px 5%;
+    background: linear-gradient(135deg, var(--light-teal) 0%, #ffffff 100%);
+}
+
+.hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.badge {
+    background: #ccfbf1;
+    color: #0f766e;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin: 20px 0;
+    line-height: 1.1;
+}
+
+.hero-content p {
+    font-size: 1.15rem;
+    color: var(--text-gray);
+    margin-bottom: 35px;
+}
+
+.hero-btns {
+    display: flex;
+    gap: 15px;
+
+}
+
+.btn-primary {
+    background: var(--primary-teal);
+    color: white;
+    padding: 16px 32px;
+    border-radius: 12px;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 1rem;
+
+}
+.btn-primary,
+.btn-signup {
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(13, 148, 136, 0.3);
+    background-color: #0f766e;
+}
+.btn-signup:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(13, 148, 136, 0.3);
+    background-color: #0f766e;
+}
+
+
+.btn-outline {
+    background: white;
+    border: 1px solid #e2e8f0;
+    padding: 16px 32px;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 1rem;
+
+}
+
+/* Preview Card */
+.preview-card {
+    background: white;
+    padding: 30px;
+    border-radius: 24px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+    border: 1px solid #f1f5f9;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-gray);
+    margin-bottom: 20px;
+}
+
+.insight-box {
+    background: var(--light-teal);
+    padding: 20px;
+    border-radius: 16px;
+    margin-bottom: 20px;
+}
+
+.vitals-row {
+    display: flex;
+    gap: 15px;
+}
+
+.vital-item {
+    background: #f8fafc;
+    padding: 10px 20px;
+    border-radius: 12px;
+    flex: 1;
+}
+
+/* Features */
+.features {
+    padding: 80px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.feature-card {
+    padding: 40px;
+    border-radius: 20px;
+    background: #fdfdfd;
+    border: 1px solid #f1f5f9;
+    text-align: center;
+}
+
+.feature-card i {
+    font-size: 2rem;
+    color: var(--primary-teal);
+    margin-bottom: 20px;
+}
+
+
+.feature-card {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary-teal);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
+}
+
+
+.footer {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-gray);
+    border-top: 1px solid #f1f5f9;
+}
+
+/* 1. Fade-In Up Animation for Text */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.reveal {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* 2. Floating Animation for the Preview Card */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.float {
+    animation: float 4s ease-in-out infinite;
+}
+
+/* 3. Pulse Animation for the Heart Icon */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+
+
+
+/* --- Responsive Media Queries --- */
+
+@media (max-width: 992px) {
+    .hero-container {
+        grid-template-columns: 1fr; /* Stack text on top of image */
+        text-align: center;
+        gap: 30px;
+    }
+
+    .hero-content h1 {
+        font-size: 2.8rem;
+    }
+
+    .hero-btns {
+        justify-content: center;
+    }
+}
+
+/* --- Optimized Mobile Navigation --- */
+
+@media (max-width: 768px) {
+    .nav-container {
+        flex-direction: column; /* Stack logo and buttons */
+        padding: 10px 0;
+    }
+
+    .nav-links {
+        display: flex; /* Ensure they stay visible! */
+        width: 100%;
+        justify-content: space-around;
+        align-items: center;
+        margin-top: 10px;
+        gap: 10px;
+    }
+
+    /* Hide the text link on very small screens to save space */
+    .nav-item {
+        display: none; 
+    }
+
+    .nav-auth {
+        display: flex;
+        gap: 10px;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .btn-signup, .btn-login {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+
+    .navbar {
+        height: auto; /* Let it grow to fit the two rows */
+    }
+}
+
+/* Fix for small phones */
+@media (max-width: 480px) {
+    .hero-btns {
+        flex-direction: column; /* Buttons stack on top of each other */
+        width: 100%;
+    }
+
+    .btn-primary, .btn-outline {
+        width: 100%;
+    }
+}

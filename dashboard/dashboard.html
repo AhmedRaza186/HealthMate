@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthMate Dashboard</title>
+    <link rel="stylesheet" href="dashboard-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <nav class="sidebar">
+            <div class="sidebar-logo">
+                <i class="fas fa-heartbeat"></i> <span>HealthMate</span>
+            </div>
+            <ul class="nav-links">
+                <li class="active"><a href="#"><i class="fas fa-th-large"></i> Family Vault</a></li>
+                <li><a href="#"><i class="fas fa-file-medical"></i> All Reports</a></li>
+                <li><a href="#"><i class="fas fa-chart-line"></i> Vital Trends</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+            <button id="logoutBtn" class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </nav>
+
+        <main class="main-content">
+            <header class="content-header">
+                <div class="welcome-text">
+                    <h1 id="userGreeting">Loading...</h1>
+                    <p>Manage your family's health records securely.</p>
+                </div>
+                <button class="btn-add-member" id="addMemberBtn">
+                    <i class="fas fa-plus"></i> Add Family Member
+                </button>
+            </header>
+
+            <section class="family-grid" id="familyGrid">
+                <div class="member-card add-card" id="emptyState">
+                    <i class="fas fa-user-plus"></i>
+                    <p>Add your first family member to get started</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script type="module" src="dashboard.js"></script>
+</body>
+</html>
