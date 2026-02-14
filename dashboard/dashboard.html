@@ -23,24 +23,103 @@
         </nav>
 
         <main class="main-content">
-            <header class="content-header">
-                <div class="welcome-text">
-                    <h1 id="userGreeting">Loading...</h1>
-                    <p>Manage your family's health records securely.</p>
-                </div>
-                <button class="btn-add-member" id="addMemberBtn">
-                    <i class="fas fa-plus"></i> Add Family Member
-                </button>
-            </header>
+    <header class="content-header">
 
-            <section class="family-grid" id="familyGrid">
-                <div class="member-card add-card" id="emptyState">
-                    <i class="fas fa-user-plus"></i>
-                    <p>Add your first family member to get started</p>
-                </div>
-            </section>
-        </main>
+        <div class="header-top">
+            <div class="welcome-text">
+                <h1 id="userGreeting">Welcome back 👋</h1>
+                <p>Your Family Health Vault</p>
+            </div>
+            <button id="logoutBtn" class="icon-btn-logout">
+                <i class="fas fa-sign-out-alt"></i>
+            </button>
+        </div>
+
+        <div class="quick-stats">
+            <div class="stat-item">
+                <i class="fas fa-users"></i>
+                <span class="stat-value">0</span>
+                <span class="stat-label">Members</span>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-file-medical"></i>
+                <span class="stat-value">0</span>
+                <span class="stat-label">Records</span>
+            </div>
+        </div>
+
+    </header>
+
+    <h3 class="section-title">Family Members</h3>
+
+    <section class="family-grid" id="familyGrid">
+        <div class="member-card add-card" id="emptyState">
+            <i class="fas fa-user-plus"></i>
+            <p>Add your first family member</p>
+        </div>
+    </section>
+</main>
+
     </div>
+
+    <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-card">
+        <div class="modal-header">
+            <h2>Add Family Member</h2>
+            <button id="closeModal"><i class="fas fa-times"></i></button>
+        </div>
+        <form id="addMemberForm">
+    <div class="profile-upload-section">
+    <div class="avatar-wrapper">
+        <img src="../assets/default-user.png" id="imagePreview" alt="Profile">
+        <label for="memberPhoto" class="upload-badge">
+            <i class="fas fa-camera"></i>
+        </label>
+        <input type="file" id="memberPhoto" accept="image/*" hidden>
+    </div>
+    <p class="upload-hint">Add a photo to identify easily</p>
+</div>
+
+    <div class="input-group">
+        <label>Full Name</label>
+        <input type="text" id="memberName" placeholder="e.g. Sarah Ahmed" required>
+    </div>
+
+    <div class="row">
+        <div class="input-group">
+            <label>Age</label>
+            <input type="number" id="memberAge" placeholder="25" required>
+        </div>
+        <div class="input-group">
+            <label>Relation</label>
+            <select id="memberRelation" required>
+                <option value="Self">Self</option>
+                <option value="Father">Father</option>
+                <option value="Mother">Mother</option>
+                <option value="Brother">Brother</option>
+                <option value="Sister">Sister</option>
+                <option value="Husband">Husband</option>
+                <option value="Wife">Wife</option>
+                <option value="Son">Son</option>
+                <option value="Daughter">Daughter</option>
+            </select>
+        </div>
+    </div>
+    <button type="submit" class="btn-save">Create Profile</button>
+</form>
+    </div>
+</div>
+
+<div class="mobile-nav">
+    <a href="#" class="nav-item active"><i class="fas fa-th-large"></i><span>Vault</span></a>
+    <a href="#" class="nav-item"><i class="fas fa-file-medical"></i><span>Docs</span></a>
+    <div class="nav-item main-add">
+        <button id="mobileAddBtn"><i class="fas fa-plus"></i></button>
+        <span>Add</span>
+    </div>
+    <a href="#" class="nav-item"><i class="fas fa-chart-line"></i><span>Trends</span></a>
+    <a href="#" class="nav-item"><i class="fas fa-cog"></i><span>Settings</span></a>
+</div>
 
     <script type="module" src="dashboard.js"></script>
 </body>
