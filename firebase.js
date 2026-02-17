@@ -9,12 +9,14 @@ import {
     onAuthStateChanged  // Added
 } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
 
-import { getFirestore, doc, setDoc, getDoc,getDocs,addDoc,deleteDoc,updateDoc, collection,serverTimestamp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+
+import { getFirestore, doc, setDoc, getDoc,getDocs,addDoc,deleteDoc,updateDoc, collection,query,orderBy,serverTimestamp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+import { firebaseApi } from "./config.js";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyA8Yol3_pDhfmAxk1mg56HiHo1tQi43MII",
+    apiKey: firebaseApi,
     authDomain: "healthmate-884bb.firebaseapp.com",
     projectId: "healthmate-884bb",
     storageBucket: "healthmate-884bb.firebasestorage.app",
@@ -51,16 +53,27 @@ export const saveUserDetails = async (uid, name, email) => {
         role: "user" // Useful for your quiz app later
     });
 };
+let isSigningUp = false
+export function setSigningUp(value) {
+  isSigningUp = value;
+}
 // --- 1. NAVIGATION PROTECTOR ---
 export const monitorAuthState = (type) => {
     return new Promise((resolve) => {
         onAuthStateChanged(auth, (user) => {
-            if (user && type === 'auth')
+            // Check if we are currently in the middle of a signup
+            if (user && type === 'auth') {
+                if(isSigningUp){
+                    return
+                }
                 window.location.href = '../dashboard/dashboard.html';
+            }
 
-            if (!user && type === 'private')
+            if (!user && type === 'private') {
                 window.location.href = '../index.html';
+            }
 
+            console.log("Auth Observer User:", user);
             resolve(user);
         });
     });
@@ -154,6 +167,62 @@ export const uploadReportData = async (uid, memberId, reportData) => {
         return { success: true };
     } catch (error) {
         console.error("Error saving report:", error);
+        return { success: false };
+    }
+};
+export const getReportData = async (uid, memberId) => {
+    const reportsRef = collection(db, "users", uid, "family", memberId, "reports");
+    const q = query(reportsRef, orderBy("date", "desc")); // Latest reports first
+    const querySnapshot = await getDocs(q);
+    console.log(querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+    })));
+    return querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+    }));
+};
+
+// Get a single report's details
+export const getSingleReport = async (uid, memberId, reportId) => {
+    try {
+        const reportRef = doc(db, "users", uid, "family", memberId, "reports", reportId);
+        const docSnap = await getDoc(reportRef);
+        
+        if (docSnap.exists()) {
+            return { id: docSnap.id, ...docSnap.data() };
+        } else {
+            throw new Error("Report not found");
+        }
+    } catch (error) {
+        console.error("Error fetching report:", error);
+        return null;
+    }
+};
+// --- DELETE REPORT FUNCTION ---
+export const deleteReport = async (uid, memberId, reportId) => {
+    try {
+        const reportRef = doc(db, "users", uid, "family", memberId, "reports", reportId);
+        await deleteDoc(reportRef);
+        return { success: true };
+    } catch (error) {
+        console.error("Error deleting report:", error);
+        return { success: false, error };
+    }
+};
+
+// Function to save AI analysis to an existing report
+export const saveAiAnalysis = async (uid, memberId, reportId, aiHtml) => {
+    try {
+        const reportRef = doc(db, "users", uid, "family", memberId, "reports", reportId);
+        await updateDoc(reportRef, {
+            aiAnalysis: aiHtml,
+            analyzedAt: new Date().toISOString()
+        });
+        return { success: true };
+    } catch (error) {
+        console.error("Error saving AI analysis:", error);
         return { success: false };
     }
 };

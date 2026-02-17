@@ -2,10 +2,14 @@ import {
     firebaseLogin,
     firebaseSignup,
     saveUserDetails,
-    monitorAuthState
+    monitorAuthState,
+    setSigningUp
 } from "../firebase.js";
 
+
+
 monitorAuthState('auth');
+
 function showToast(message, type = 'error') {
     // 1. Check if container exists, if not, create it
     let container = document.getElementById('toast-container');
@@ -103,7 +107,8 @@ sForm?.addEventListener('submit', async (e) => {
     const password = sForm.querySelector('input[type="password"]').value;
 
     try {
-   // 1. Create the Auth Account
+        // 1. Create the Auth Account
+        setSigningUp(true);
         const userCredential = await firebaseSignup(email, password);
         const user = userCredential.user;
 

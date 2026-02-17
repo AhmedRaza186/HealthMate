@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="reportReview.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="review-container">
+        <div class="viewer-side">
+            <header class="side-header">
+                <h3><i class="fas fa-file-alt"></i> <span id="viewReportTitle">Report Name</span></h3>
+                <button class="btn-icon" onclick="history.back()"><i class="fas fa-times"></i></button>
+            </header>
+            <div id="documentFrame" class="document-frame">
+                <p class="loading-text">Loading document...</p>
+            </div>
+        </div>
+
+        <div class="ai-side">
+            <div class="ai-header">
+                <h3><i class="fas fa-robot"></i> AI Health Insights</h3>
+            </div>
+            <div id="aiResponseArea" class="ai-content">
+                <div class="ai-placeholder">
+                    <i class="fas fa-microscope"></i>
+                    <p>Click the button below to analyze this report with AI.</p>
+                </div>
+            </div>
+            <div class="ai-footer">
+                <button id="analyzeBtn" class="btn-analyze">
+                    <i class="fas fa-wand-magic-sparkles"></i> Analyze Report
+                </button>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="reportReview.js"></script>
+</body>
+
+</html>

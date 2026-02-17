@@ -21,7 +21,36 @@ body {
     background: var(--light-bg);
     color: var(--dark-blue);
 }
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 
+.toast {
+    min-width: 300px;
+    padding: 16px 20px;
+    border-radius: 12px;
+    color: white;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+    animation: slideIn 0.4s ease-out;
+}
+
+.toast-error {
+    background-color: #ef4444;
+}
+
+.toast-success {
+    background-color: #10b981;
+}
 /* ---------------- APP LAYOUT ---------------- */
 .healthmate-app {
     display: flex;
@@ -408,6 +437,28 @@ body {
     color: var(--text-muted);
     font-size: 0.9rem;
 }
+.doc-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+}
+
+.doc-name i {
+    color: #e74c3c; /* Red for PDF icon */
+}
+
+.action-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    margin-right: 10px;
+    color: #666;
+    transition: 0.3s;
+}
+
+.action-btn.view:hover { color: #3498db; }
+.action-btn.delete:hover { color: #e74c3c; }
 
 /* Buttons */
 .btn-primary {
@@ -645,35 +696,58 @@ body {
 }
 
 /* Filter & Sort buttons */
+/* Filter Bar Container */
 .filter-actions {
     display: flex;
-    gap: 10px;
-}
-
-.btn-outline {
-    background: var(--white);
-    border: 1px solid var(--border);
-    color: #475569;
-    padding: 10px 18px;
-    border-radius: 12px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
     align-items: center;
-    gap: 6px;
-    transition: 0.3s;
 }
 
-.btn-outline:hover {
-    background: #f8fafc;
-    border-color: #cbd5e1;
-    color: var(--dark-blue);
+/* Base Select Styling */
+.filter-actions select {
+    padding: 10px 16px;
+    border: 1.5px solid #eef2f7;
+    border-radius: 10px;
+    background-color: #fff;
+    color: #475569;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    outline: none;
+    appearance: none; /* Removes default arrow */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m19 9-7 7-7-7'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 40px;
+    min-width: 160px;
 }
 
-.btn-outline i {
-    font-size: 0.85rem;
-    color: #94a3b8;
+/* Hover & Focus states */
+.filter-actions select:hover {
+    border-color: var(--primary); /* Uses your healthmate primary color */
+    background-color: #f8fafc;
+}
+
+.filter-actions select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.1);
+}
+
+
+
+/* Responsive fix for mobile */
+@media (max-width: 600px) {
+    .filter-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .filter-actions select {
+        width: 100%;
+    }
 }
 
 /* Table */
@@ -782,33 +856,25 @@ body {
         justify-content: center;
     }
 
-    /* 5. Transform Table into "Card View" for Mobile */
-    /* This prevents horizontal scrolling and makes data readable */
-    .health-table thead {
-        display: none; /* Hide headers on mobile */
-    }
+  .table-container {
+    overflow-x: auto; /* allows horizontal scroll */
+    -webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
+  }
 
-    .health-table, .health-table tbody, .health-table tr, .health-table td {
-        display: block;
-        width: 100%;
-    }
+  .health-table {
+    min-width: 600px; /* ensures table doesn’t shrink too much */
+  }
 
-    .health-table tr {
-        margin-bottom: 15px;
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 10px;
-        background: var(--white);
-    }
+  .health-table td,
+  .health-table th {
+    padding: 12px 16px; /* smaller padding on mobile */
+    font-size: 0.85rem; /* adjust font */
+  }
 
-    .health-table td {
-        border: none;
-        padding: 8px 10px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        text-align: right;
-    }
+  /* Optional: wrap long text in cells */
+  .health-table td {
+    white-space: normal; /* allow line breaks */
+  }
 
     /* Add labels for the data */
     .health-table td::before {
