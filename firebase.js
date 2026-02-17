@@ -72,7 +72,6 @@ export const monitorAuthState = (type) => {
                 window.location.href = '../index.html';
             }
 
-            console.log("Auth Observer User:", user);
             resolve(user);
         });
     });
@@ -80,7 +79,6 @@ export const monitorAuthState = (type) => {
 // Fetch User Profile Name
 export const getUserData = async (uid) => {
     const docSnap = await getDoc(doc(db, "users", uid));
-    console.log(docSnap)
     return docSnap.exists() ? docSnap.data() : null;
 };
 
@@ -173,10 +171,6 @@ export const getReportData = async (uid, memberId) => {
     const reportsRef = collection(db, "users", uid, "family", memberId, "reports");
     const q = query(reportsRef, orderBy("date", "desc")); // Latest reports first
     const querySnapshot = await getDocs(q);
-    console.log(querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-    })));
     return querySnapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data()

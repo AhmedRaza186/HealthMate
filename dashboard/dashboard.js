@@ -36,9 +36,6 @@ let user = await monitorAuthState('private');
 let userData = await getUserData(user.uid)
 
 
-console.log(userData)
-
-
 let userGreeting = document.querySelector('#userGreeting')
 
 userGreeting.innerText = `Welcome, ${userData.fullName}`;

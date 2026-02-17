@@ -38,7 +38,7 @@ let currentReport = null;
 
 
 let user = await monitorAuthState('private'); // Ensure user is logged in
-console.log(user)
+
     
     const params = new URLSearchParams(window.location.search);
     const memberId = params.get('memberId');
@@ -93,7 +93,7 @@ analyzeBtn.onclick = async () => {
 
     try {
          const aiHtml = await analyzeWithGroq(currentReport.fileURL);
-         console.log(aiHtml)
+
 // 2. Save to Firestore
         const saveResult = await saveAiAnalysis(user.uid, memberId, reportId, aiHtml);
         if (saveResult.success) {
@@ -208,7 +208,7 @@ Always follow this structure and fill in all sections from the report image.` }
     }
 
     const data = await response.json();
-    console.log("Full API error:", data);
+
 
     return data.choices[0].message.content;
 }

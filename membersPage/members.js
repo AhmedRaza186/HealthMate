@@ -34,7 +34,7 @@ import { deleteReport, getReportData, getSingleMember, monitorAuthState, updateM
 
 const params = new URLSearchParams(window.location.search);
 let memberId = decodeURIComponent(params.get('id') || "");
-console.log(memberId)
+
 if (!memberId) {
     window.location.href = "../dashboard/dashboard.html";
 }
@@ -43,7 +43,7 @@ const reportsTableBody = document.getElementById('reportsTableBody');
 
 let user = await monitorAuthState()
 let memberData = await getSingleMember(user.uid, memberId)
-console.log(memberData)
+
 displayMemberData(memberData)
 
 if (user && memberId) {
@@ -332,7 +332,7 @@ async function displayReports(reportsArray) {
             } catch (error) {
                 deleteBtn.innerHTML = originalIcon;
                 deleteBtn.style.pointerEvents = 'auto';
-                console.log("Failed to delete report. Please try again.", error);
+
             }
         }
     });

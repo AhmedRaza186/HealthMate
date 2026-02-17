@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="docs-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <link rel="shortcut icon" href="./assets/favicon.png" type="image/x-icon">
 </head>
 <body class="reveal">
 
@@ -31,41 +32,111 @@
             </ul>
         </aside>
 
-        <main class="docs-content">
-            <section id="introduction">
-                <h1>Introduction</h1>
-                <p>Welcome to <strong>HealthMate</strong>, your healthy friend. This guide will help you understand how to use our platform to manage your medical records efficiently.</p>
-                <div class="info-note">
-                    <i class="fas fa-info-circle"></i>
-                    <p>HealthMate is a tool for understanding. Always consult a real doctor for medical decisions.</p>
-                </div>
-            </section>
+       <main class="docs-content">
 
-            <section id="uploading">
-                <h2>How to Upload Reports</h2>
-                <p>You can upload images (JPG, PNG) or PDF files of your lab reports. Our system processes them directly.</p>
-                <ol>
-                    <li>Go to your Dashboard.</li>
-                    <li>Click on <strong>"Analyze Report"</strong>.</li>
-                    <li>Select your file and wait for your <i>Dost</i> to read it.</li>
-                </ol>
-            </section>
+    <section id="introduction">
+        <h1>HealthMate Documentation</h1>
+        <p>
+            HealthMate is a secure, family-centered digital health vault designed to help you 
+            organize, analyze, and manage medical records in one place.
+        </p>
 
-            <section id="understanding">
-                <h2>Reading Insights</h2>
-                <p>Once processed, you will see a summary in two languages:</p>
-                <ul>
-                    <li><strong>English:</strong> For technical accuracy.</li>
-                    <li><strong>Roman Urdu:</strong> For easy understanding at home.</li>
-                </ul>
-                <p>We highlight abnormal values like High Sugar or Low Hemoglobin so you can discuss them with your doctor.</p>
-            </section>
+        <div class="info-note">
+            <i class="fas fa-shield-alt"></i>
+            <p>
+                HealthMate provides informational insights only. 
+                It does not replace professional medical advice, diagnosis, or treatment.
+            </p>
+        </div>
 
-            <section id="vitals">
-                <h2>Tracking Vitals</h2>
-                <p>Even without a lab report, you can keep a log of your health. Simply enter your Blood Pressure, Sugar levels, or Weight manually in the "Vitals" section.</p>
-            </section>
-        </main>
+        <p>
+            This guide explains how to upload reports, understand AI insights, 
+            manage family profiles, and keep your data secure.
+        </p>
+    </section>
+
+    <section id="uploading">
+        <h2>Uploading Medical Reports</h2>
+        <p>
+            You can upload laboratory reports, prescriptions, and radiology results 
+            in JPG, PNG, or PDF format.
+        </p>
+
+        <ol>
+            <li>Navigate to your Dashboard.</li>
+            <li>Select the appropriate family member.</li>
+            <li>Click <strong>"Analyze Report"</strong>.</li>
+            <li>Upload your file and wait for processing.</li>
+        </ol>
+
+        <p>
+            Each uploaded report is securely stored in your personal Medical Vault 
+            and tagged with metadata such as title, category, date, and file size.
+        </p>
+    </section>
+
+    <section id="understanding">
+        <h2>Understanding AI Insights</h2>
+        <p>
+            After processing, HealthMate generates a structured summary of your report.
+        </p>
+
+        <ul>
+            <li><strong>Description:</strong> A simplified explanation of the report findings.</li>
+            <li><strong>Highlights:</strong> Important or abnormal values that need attention.</li>
+            <li><strong>Questions to Ask Your Doctor:</strong> Suggested discussion points.</li>
+            <li><strong>Precautions:</strong> General lifestyle considerations.</li>
+            <li><strong>Things to Avoid:</strong> Activities that may worsen the condition.</li>
+        </ul>
+
+        <p>
+            Insights are available in both <strong>English</strong> and 
+            <strong>Roman Urdu</strong> for better accessibility.
+        </p>
+    </section>
+
+    <section id="vitals">
+        <h2>Managing Family Profiles</h2>
+        <p>
+            HealthMate allows you to create multiple family profiles under one account.
+        </p>
+
+        <ul>
+            <li>Add profile photos</li>
+            <li>Track age and blood group</li>
+            <li>Define relationship to the primary account holder</li>
+            <li>Switch between members instantly</li>
+        </ul>
+
+        <p>
+            Each member has an independent medical vault, ensuring organized and separate records.
+        </p>
+    </section>
+
+    <section id="privacy">
+        <h2>Privacy & Security</h2>
+        <p>
+            Your medical data is private and protected using modern security practices.
+        </p>
+
+        <ul>
+            <li>Firebase Authentication for secure login</li>
+            <li>User-based data isolation using unique UID paths</li>
+            <li>Cloud storage via secure Cloudinary integration</li>
+            <li>No public access to personal medical records</li>
+        </ul>
+
+        <div class="info-note">
+            <i class="fas fa-lock"></i>
+            <p>
+                Only authenticated users can access their own data. 
+                HealthMate does not share medical information with third parties.
+            </p>
+        </div>
+    </section>
+
+</main>
+
     </div>
 
 </body>
