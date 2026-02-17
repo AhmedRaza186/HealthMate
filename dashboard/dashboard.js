@@ -1,6 +1,35 @@
 import { uploadImg } from "../cloudinary.js";
 import { monitorAuthState, firebaseLogout, getUserData, saveUserDetails, saveFamilyMember, getFamilyMembers, deleteFamilyMember } from "../firebase.js";
 
+function showToast(message, type = 'error') {
+   // 1. Check if container exists, if not, create it
+   let container = document.getElementById('toast-container');
+   if (!container) {
+       container = document.createElement('div');
+       container.id = 'toast-container';
+       container.className = 'toast-container';
+       document.body.appendChild(container);
+   }
+
+   // 2. Create the toast
+   const toast = document.createElement('div');
+   toast.className = `toast toast-${type}`;
+   const icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
+
+   toast.innerHTML = `
+       <i class="fas ${icon}"></i>
+       <span>${message}</span>
+   `;
+
+   container.appendChild(toast);
+
+   // 3. Remove logic
+   setTimeout(() => {
+       toast.style.opacity = '0';
+       toast.style.transform = 'translateY(-20px)';
+       setTimeout(() => toast.remove(), 500);
+   }, 3000);
+}
 // Tell the monitor this is a 'private' page
 let user = await monitorAuthState('private');
 
@@ -145,9 +174,12 @@ async function renderFamily() {
                 delBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
                 const result = await deleteFamilyMember(user.uid, member.id);
                 if (result.success) {
-                    renderFamily(); // Refresh the list
+                    showToast("Member deleted", 'success');
+                    setTimeout(() => {
+                        renderFamily();
+                    }, 2000) // Refresh the list
                 } else {
-                    alert("Could not delete member.");
+                    showToast("Could not delete member.");
                     delBtn.innerHTML = '<i class="fas fa-trash-alt"></i>';
                 }
             }
@@ -195,10 +227,14 @@ addMemberForm.addEventListener('submit', async (e) => {
             addMemberForm.reset();
             document.getElementById('imagePreview').src = "../assets/default-user.png"; // Reset preview
             modalOverlay.classList.remove('active');
-            renderFamily(); // Refresh the grid
+                       showToast("Member added", 'success');
+                    setTimeout(() => {
+                        renderFamily();
+                    }, 2000) // Refresh the list
+
         }
     } catch (error) {
-        alert("Something went wrong!");
+        showToast("Something went wrong!");
         console.error(error);
     } finally {
         submitBtn.innerText = originalText;
@@ -209,4 +245,7 @@ addMemberForm.addEventListener('submit', async (e) => {
 
 
 // 3. Logout
-document.getElementById('logoutBtn')?.addEventListener('click', firebaseLogout);
+document.querySelectorAll('.logout').forEach((btn) => {
+    btn.addEventListener('click', firebaseLogout);
+})
+

@@ -1,6 +1,37 @@
-import { getSingleMember, getSingleReport, monitorAuthState, saveAiAnalysis } from "../firebase.js";
 
-// import { showToast } from "../auth/auth.js";
+import { groqApi } from "../config.js";
+import { getSingleMember, getSingleReport, monitorAuthState, saveAiAnalysis } from "../firebase.js";
+ function showToast(message, type = 'error') {
+    // 1. Check if container exists, if not, create it
+    let container = document.getElementById('toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'toast-container';
+        container.className = 'toast-container';
+        document.body.appendChild(container);
+    }
+
+    // 2. Create the toast
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type}`;
+    const icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
+
+    toast.innerHTML = `
+        <i class="fas ${icon}"></i>
+        <span>${message}</span>
+    `;
+
+    container.appendChild(toast);
+
+    // 3. Remove logic
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(-20px)';
+        setTimeout(() => toast.remove(), 500);
+    }, 3000);
+}
+
+
 // 1. Declare global variables so all functions can see them
 let currentReport = null; 
 
@@ -26,7 +57,7 @@ async function loadReviewPage(memberId, reportId) {
     currentReport = await getSingleReport(user.uid, memberId, reportId);
     
     if (!currentReport) {
-        alert("Report not found!");
+        showToast("Report not found!");
         return;
     }
 
@@ -105,14 +136,14 @@ async function urlToBase64(url) {
         reader.readAsDataURL(blob);
     });
 }
-let myGroqApi = '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'
+let myApi = groqApi
 async function analyzeWithGroq(fileUrl) {
     const base64Image = await urlToBase64(fileUrl);
 
     const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
         method: "POST",
         headers: {
-            "Authorization": `Bearer ${myGroqApi}`,
+            "Authorization": `Bearer ${myApi}`,
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
@@ -182,6 +213,3 @@ Always follow this structure and fill in all sections from the report image.` }
     return data.choices[0].message.content;
 }
 
-// Start the script
-// grokAPiKey
-// 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

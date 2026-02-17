@@ -10,7 +10,7 @@ import {
 
 monitorAuthState('auth');
 
-function showToast(message, type = 'error') {
+ function showToast(message, type = 'error') {
     // 1. Check if container exists, if not, create it
     let container = document.getElementById('toast-container');
     if (!container) {

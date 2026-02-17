@@ -1,5 +1,36 @@
+
 import { uploadImg } from "../cloudinary.js";
 import { deleteReport, getReportData, getSingleMember, monitorAuthState, updateMemberData, uploadReportData } from "../firebase.js";
+
+ function showToast(message, type = 'error') {
+    // 1. Check if container exists, if not, create it
+    let container = document.getElementById('toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'toast-container';
+        container.className = 'toast-container';
+        document.body.appendChild(container);
+    }
+
+    // 2. Create the toast
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type}`;
+    const icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
+
+    toast.innerHTML = `
+        <i class="fas ${icon}"></i>
+        <span>${message}</span>
+    `;
+
+    container.appendChild(toast);
+
+    // 3. Remove logic
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(-20px)';
+        setTimeout(() => toast.remove(), 500);
+    }, 3000);
+}
 
 const params = new URLSearchParams(window.location.search);
 let memberId = decodeURIComponent(params.get('id') || "");
@@ -17,7 +48,7 @@ displayMemberData(memberData)
 
 if (user && memberId) {
     // Initial fetch from Firebase
-    allReports = await getReportData(user.uid, memberId); 
+    allReports = await getReportData(user.uid, memberId);
     displayReports(allReports); // Pass the data to the function
 }
 
@@ -125,15 +156,17 @@ editForm.onsubmit = async (e) => {
         const result = await updateMemberData(user.uid, memberId, updatedInfo);
 
         if (result.success) {
-            alert("Profile updated successfully!");
-            location.reload(); // Refresh to show new data
+            showToast("Profile updated successfully!", 'success');
+              setTimeout(() => {
+                location.reload(); // Refresh to see the new entry in the table
+            }, 2000) // Refresh to show new data
         } else {
-            alert("Update failed. Please try again.");
+            showToast("Update failed. Please try again.");
         }
 
     } catch (error) {
         console.error("Critical error during update:", error);
-        alert("An error occurred while saving.");
+        showToast("An error occurred while saving.");
     } finally {
         submitBtn.innerText = originalBtnText;
         submitBtn.disabled = false;
@@ -176,7 +209,7 @@ reportForm.onsubmit = async (e) => {
     submitBtn.disabled = true;
 
     const file = document.getElementById('reportFile').files[0];
-    if (!file) return alert("Please select a file first!");
+    if (!file) return showToast("Please select a file first!");
 
     try {
         const fileSize = formatBytes(file.size);
@@ -197,12 +230,14 @@ reportForm.onsubmit = async (e) => {
         const result = await uploadReportData(user.uid, memberId, reportData);
         await displayReports(allReports)
         if (result.success) {
-            alert("Report saved successfully!");
-            location.reload(); // Refresh to see the new entry in the table
+            showToast("Report saved successfully!", 'success');
+            setTimeout(() => {
+                location.reload(); // Refresh to see the new entry in the table
+            }, 2000)
         }
     } catch (error) {
         console.error("Upload failed:", error);
-        alert("Something went wrong.");
+        showToast("Something went wrong.");
     } finally {
         submitBtn.innerHTML = originalBtnText;
         submitBtn.disabled = false;
@@ -263,47 +298,47 @@ async function displayReports(reportsArray) {
     });
 
     // Add event delegation for the delete button
-// Add this at the end of your displayReports function or script
-reportsTableBody.addEventListener('click', async (e) => {
-    const deleteBtn = e.target.closest('.delete');
-    if (!deleteBtn) return;
+    // Add this at the end of your displayReports function or script
+    reportsTableBody.addEventListener('click', async (e) => {
+        const deleteBtn = e.target.closest('.delete');
+        if (!deleteBtn) return;
 
-    const reportId = deleteBtn.getAttribute('data-id');
-    
-    // 1. Confirm with the user
-    if (confirm("Are you sure you want to delete this medical record? This cannot be undone.")) {
-        
-        // 2. UI Feedback
-        const originalIcon = deleteBtn.innerHTML;
-        deleteBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i>`;
-        deleteBtn.style.pointerEvents = 'none';
+        const reportId = deleteBtn.getAttribute('data-id');
 
-        try {
-            // 3. Call Firebase
-            const result = await deleteReport(user.uid, memberId, reportId);
-            
-            if (result.success) {
-                // 4. Refresh the table (instantly shows the new state)
-                // 1. Remove from local array
-    allReports = allReports.filter(r => r.id !== reportId);
-    
-    // 2. Refresh the UI with current filters applied
-    handleSearchFilterSort();
-                await displayReports(allReports);
-                alert("Report deleted successfully", "success");
-            } else {
-                throw new Error("Delete failed");
+        // 1. Confirm with the user
+        if (confirm("Are you sure you want to delete this medical record? This cannot be undone.")) {
+
+            // 2. UI Feedback
+            const originalIcon = deleteBtn.innerHTML;
+            deleteBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i>`;
+            deleteBtn.style.pointerEvents = 'none';
+
+            try {
+                // 3. Call Firebase
+                const result = await deleteReport(user.uid, memberId, reportId);
+
+                if (result.success) {
+                    // 4. Refresh the table (instantly shows the new state)
+                    // 1. Remove from local array
+                    allReports = allReports.filter(r => r.id !== reportId);
+
+                    // 2. Refresh the UI with current filters applied
+                    handleSearchFilterSort();
+                    await displayReports(allReports);
+                    showToast("Report deleted successfully", "success");
+                } else {
+                    throw new Error("Delete failed");
+                }
+            } catch (error) {
+                deleteBtn.innerHTML = originalIcon;
+                deleteBtn.style.pointerEvents = 'auto';
+                console.log("Failed to delete report. Please try again.", error);
             }
-        } catch (error) {
-            deleteBtn.innerHTML = originalIcon;
-            deleteBtn.style.pointerEvents = 'auto';
-            console.log("Failed to delete report. Please try again.",error);
         }
-    }
-});
+    });
 }
 const searchInput = document.querySelector('.search-wrapper input');
-const categoryFilter = document.getElementById('reportCategoryFilter'); 
+const categoryFilter = document.getElementById('reportCategoryFilter');
 const sortSelect = document.getElementById('reportSortSelect');
 
 function handleSearchFilterSort() {
