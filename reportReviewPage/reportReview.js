@@ -1,4 +1,3 @@
-import { groqApi } from "../config.js";
 import { getSingleMember, getSingleReport, monitorAuthState, saveAiAnalysis } from "../firebase.js";
 
 // import { showToast } from "../auth/auth.js";
@@ -106,7 +105,7 @@ async function urlToBase64(url) {
         reader.readAsDataURL(blob);
     });
 }
-let myGroqApi = groqApi
+let myGroqApi = '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'
 async function analyzeWithGroq(fileUrl) {
     const base64Image = await urlToBase64(fileUrl);
 

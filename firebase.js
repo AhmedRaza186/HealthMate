@@ -9,14 +9,12 @@ import {
     onAuthStateChanged  // Added
 } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
 
-
 import { getFirestore, doc, setDoc, getDoc,getDocs,addDoc,deleteDoc,updateDoc, collection,query,orderBy,serverTimestamp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
-import { firebaseApi } from "./config.js";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: firebaseApi,
+    apiKey: "AIzaSyA8Yol3_pDhfmAxk1mg56HiHo1tQi43MII",
     authDomain: "healthmate-884bb.firebaseapp.com",
     projectId: "healthmate-884bb",
     storageBucket: "healthmate-884bb.firebasestorage.app",
